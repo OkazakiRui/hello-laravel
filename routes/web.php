@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get("/hello",function(){
+    echo "<h1>Hello laravel!</h1>";
+});
+Route::get('/books/{bookNo}', function ($bookNo) {
+    echo "<h1>" . $bookNo . "番目の本です！</h1>";
+});
