@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BMIRequest;
 
 class BMIController extends Controller
 {
@@ -10,7 +11,7 @@ class BMIController extends Controller
         return view("bmi");
     }
 
-    public function store(Request $request) {
+    public function store(BMIRequest $request) {
         // 個別に取得
         $height = $request->input("height");
         $weight = $request->input("weight");
