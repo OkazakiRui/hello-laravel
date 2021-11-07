@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\BMIController;
+use App\Http\Controllers\NoteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +19,8 @@ Route::get('/evenOddJudgment/{num}', [HelloController::class, "evenOddJudgment"]
 
 Route::get('/bmi',[BMIController::class, "index"])->name("bmi");
 Route::post('/bmi/send', [BMIController::class, "store"])->name("bmi.store");
+
+Route::get('/notes', [NoteController::class, "index"])->name("notes");
+Route::get('/notes/{noteId}', [NoteController::class, "show"])->name("get") -> where(["noteId" => "[0-9]+"]);
+Route::get('/notes/new', [NoteController::class, "new"])->name("notes.new");
+Route::post('/notes', [NoteController::class, "store"])->name("notes.create");
