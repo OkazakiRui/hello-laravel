@@ -29,4 +29,22 @@ class NoteController extends Controller
         $created_note = Note::create($params);
         return redirect()->route("notes");
     }
+    public function edit($noteId){
+        $note = Note::findOrFail($noteId);
+        return view("edit_note", ["note" => $note]);
+    }
+    public function update(CreateNoteRequest $request, $noteId){
+        $note = Note::findOrFail($noteId);
+        // title, textを連想配列で取得する
+        $params = $request->only("title", "text");
+        // 取得したNoteインスタンスに送られてきたデータ(title, text)を上書きします。
+        $note->fill($params);
+        $note->save();
+        return redirect()->route("get", ["noteId"=>$noteId]);
+    }
+    public function delete($noteId){
+        $note = Note::findOrFail($noteId);
+        $note->delete();
+        return redirect()->route("notes");
+    }
 }
